@@ -55,7 +55,7 @@ bool predator_scene_wardriving_on_event(void* context, SceneManagerEvent event) 
                     "Networks: %lu\n"
                     "GPS: %.6f, %.6f\n"
                     "Press Back to stop", 
-                    app->targets_found, app->latitude, app->longitude);
+                    app->targets_found, (double)app->latitude, (double)app->longitude);
             } else {
                 snprintf(status_text, sizeof(status_text), 
                     "Collecting WiFi + GPS data...\n"

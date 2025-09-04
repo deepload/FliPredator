@@ -48,7 +48,7 @@ bool predator_scene_gps_tracker_on_event(void* context, SceneManagerEvent event)
                     "Satellites: %lu\n"
                     "Lat: %.6f\n"
                     "Lon: %.6f", 
-                    app->satellites, app->latitude, app->longitude);
+                    app->satellites, (double)app->latitude, (double)app->longitude);
             } else {
                 snprintf(status_text, sizeof(status_text), 
                     "Acquiring GPS signal...\n"

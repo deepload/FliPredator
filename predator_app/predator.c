@@ -72,20 +72,18 @@ PredatorApp* predator_app_alloc() {
 
     view_dispatcher_attach_to_gui(app->view_dispatcher, app->gui, ViewDispatcherTypeFullscreen);
 
-    // Initialize hardware communication
-    app->esp32_uart = predator_uart_init(
-        PREDATOR_ESP32_UART_TX_PIN,
-        PREDATOR_ESP32_UART_RX_PIN,
-        PREDATOR_ESP32_UART_BAUD,
-        predator_esp32_rx_callback,
-        app);
+    // Initialize hardware modules
+    app->esp32_uart = predator_uart_init(PREDATOR_ESP32_UART_TX_PIN, PREDATOR_ESP32_UART_RX_PIN, PREDATOR_ESP32_UART_BAUD, predator_esp32_rx_callback, app);
+    app->gps_uart = predator_uart_init(PREDATOR_GPS_UART_TX_PIN, PREDATOR_GPS_UART_RX_PIN, PREDATOR_GPS_UART_BAUD, predator_gps_rx_callback, app);
     
-    app->gps_uart = predator_uart_init(
-        PREDATOR_GPS_UART_TX_PIN,
-        PREDATOR_GPS_UART_RX_PIN,
-        PREDATOR_GPS_UART_BAUD,
-        predator_gps_rx_callback,
-        app);
+    // Initialize connection status
+    app->esp32_connected = false;
+    app->gps_connected = false;
+    app->targets_found = 0;
+    app->packets_sent = 0;
+    app->latitude = 0.0f;
+    app->longitude = 0.0f;
+    app->satellites = 0;
 
     scene_manager_next_scene(app->scene_manager, PredatorSceneStart);
 
@@ -97,10 +95,10 @@ void predator_app_free(PredatorApp* app) {
 
     // Free UART connections
     if(app->esp32_uart) {
-        predator_uart_free(app->esp32_uart);
+        predator_uart_deinit(app->esp32_uart);
     }
     if(app->gps_uart) {
-        predator_uart_free(app->gps_uart);
+        predator_uart_deinit(app->gps_uart);
     }
 
     view_dispatcher_remove_view(app->view_dispatcher, PredatorViewSubmenu);

@@ -11,8 +11,21 @@ python build_predator_firmware.py
 # Build firmware with modifications only
 python build_predator_firmware.py --no-app
 
-# Offline mode (skip network operations)
-python build_predator_firmware.py --no-app --offline
+# Build just the Predator app (recommended)
+cd predator_app
+ufbt build
+
+# Copy app to firmware and build complete firmware
+python copy_predator.py
+cd flipperzero-firmware-wPlugins
+
+# Windows build commands
+.\fbt.cmd COMPACT=1 DEBUG=0
+# OR
+python scripts\fbt.py COMPACT=1 DEBUG=0
+
+# Linux/macOS build commands  
+./fbt COMPACT=1 DEBUG=0
 ```
 
 ## 📋 Prerequisites

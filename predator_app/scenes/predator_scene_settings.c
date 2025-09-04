@@ -1,4 +1,6 @@
 #include "../predator_i.h"
+#include "../helpers/predator_esp32.h"
+#include "../helpers/predator_gps.h"
 
 enum SubmenuIndex {
     SubmenuIndexModuleStatus,

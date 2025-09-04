@@ -4,6 +4,8 @@ import shutil
 import sys
 import argparse
 
+# Project paths
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 REPO_URL = "https://github.com/RogueMaster/flipperzero-firmware-wPlugins.git"
 REPO_DIR = "flipperzero-firmware-wPlugins"
 FIRMWARE_OUTPUT = os.path.join(REPO_DIR, "dist", "f7-C", "firmware.upd")
@@ -179,14 +181,14 @@ def build(install_app=True):
     global FIRMWARE_OUTPUT
     
     print("[*] Setting up build environment...")
-    run("ufbt update", cwd=REPO_DIR)
     
     if install_app:
         print("[*] Building Predator app...")
-        # Build the Predator app as a FAP (Flipper Application Package)
+        # Build the Predator app using the local firmware build system
         predator_app_dir = os.path.join(REPO_DIR, "applications_user", "predator")
         if os.path.exists(predator_app_dir):
-            run("ufbt", cwd=predator_app_dir)
+            # Use the local firmware build system instead of ufbt
+            run("python fbt.py fap_predator", cwd=REPO_DIR)
         else:
             print("[!] Error: Predator app not found in applications_user")
             sys.exit(1)
@@ -248,7 +250,7 @@ def copy_predator_app(install_app=True):
         print("[*] Skipping Predator app installation (firmware-only mode)")
         return False
     
-    predator_src = "predator_app"
+    predator_src = os.path.join(PROJECT_ROOT, "predator_app")
     predator_dst = os.path.join(REPO_DIR, "applications_user", "predator")
     
     if not os.path.exists(predator_src):

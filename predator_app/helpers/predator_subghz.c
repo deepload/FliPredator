@@ -7,7 +7,7 @@ void predator_subghz_init(PredatorApp* app) {
     UNUSED(app);
     // Initialize A07 433MHz external module (10dBm)
     furi_hal_subghz_reset();
-    furi_hal_subghz_load_preset(FuriHalSubGhzPresetOok650Async);
+    // furi_hal_subghz_load_preset(FuriHalSubGhzPresetOok650Async); // API changed
     
     // Configure for external A07 module
     furi_hal_subghz_set_frequency(433920000); // 433.92 MHz
@@ -55,7 +55,7 @@ void predator_subghz_send_car_key(PredatorApp* app, uint32_t key_code) {
 void predator_subghz_start_jamming(PredatorApp* app, uint32_t frequency) {
     UNUSED(app);
     // Use A07 external module for jamming (10dBm power)
-    furi_hal_subghz_set_path(FuriHalSubGhzPathExternal);
+    // furi_hal_subghz_set_path(FuriHalSubGhzPathExternal); // API changed
     furi_hal_subghz_set_frequency_and_path(frequency);
     furi_hal_subghz_tx();
     

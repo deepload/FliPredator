@@ -44,7 +44,7 @@ bool predator_scene_car_tesla_on_event(void* context, SceneManagerEvent event) {
             // Send Tesla charge port signal every 2 seconds
             if(app->packets_sent % 20 == 0) {
                 predator_subghz_send_tesla_charge_port(app);
-                notification_message(app->notifications, &sequence_blink_start_10);
+                // notification_message(app->notifications, &sequence_blink_start_10); // Sequence not available
             }
             
             char status_text[128];

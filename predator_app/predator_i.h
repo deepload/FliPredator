@@ -11,10 +11,8 @@
 #include <gui/modules/loading.h>
 #include <gui/modules/widget.h>
 #include <notification/notification_messages.h>
+#include <dialogs/dialogs.h>
 #include <storage/storage.h>
-
-// Forward declarations
-typedef struct PredatorApp PredatorApp;
 
 #define PREDATOR_TEXT_STORE_SIZE 256
 
@@ -39,7 +37,7 @@ typedef enum {
     PredatorCustomEventDeauthComplete,
 } PredatorCustomEvent;
 
-typedef struct {
+typedef struct PredatorApp {
     Gui* gui;
     NotificationApp* notifications;
     DialogsApp* dialogs;
@@ -94,9 +92,9 @@ typedef struct {
 
 // Hardware Control Pins
 #define PREDATOR_GPS_POWER_SWITCH  &gpio_ext_pa4  // GPS power switch (front left)
-#define PREDATOR_MARAUDER_SWITCH   &gpio_ext_pa5  // Marauder switch (front right)
+#define PREDATOR_MARAUDER_SWITCH   &gpio_ext_pa7  // Marauder switch (front right)
 #define PREDATOR_CHARGING_LED      &gpio_ext_pa6  // Charging indicator
-#define PREDATOR_ESP32_BOOT_BTN    &gpio_ext_pa7  // ESP32 boot button
+#define PREDATOR_ESP32_BOOT_BTN    &gpio_ext_pa5  // ESP32 boot button
 
 // ESP32S2 Marauder Commands (Compatible with Marauder firmware)
 #define MARAUDER_CMD_WIFI_SCAN       "scanap"
