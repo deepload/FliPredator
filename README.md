@@ -11,6 +11,8 @@ python build_predator_firmware.py
 # Build firmware with modifications only
 python build_predator_firmware.py --no-app
 
+.\fbt.cmd firmware_all 2>&1 | tee build.log
+
 # Build just the Predator app (recommended)
 cd predator_app
 ufbt build
