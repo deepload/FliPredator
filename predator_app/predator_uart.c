@@ -97,7 +97,7 @@ void predator_uart_set_br(PredatorUart* uart, uint32_t baud) {
     furi_hal_serial_set_br(uart->serial_handle, baud);
 }
 
-void predator_uart_set_rx_callback(PredatorUart* uart, void (*callback)(uint8_t*, size_t, void*), void* context) {
+void predator_uart_set_rx_callback(PredatorUart* uart, PredatorUartRxCallback callback, void* context) {
     furi_assert(uart);
     uart->rx_callback = callback;
     uart->rx_callback_context = context;

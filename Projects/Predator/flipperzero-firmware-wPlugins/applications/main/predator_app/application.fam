@@ -1,0 +1,15 @@
+App(
+    appid="predator",
+    name="Predator",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="predator_app",
+    requires=["gui"],
+    stack_size=2 * 1024,
+    fap_category="Tools",
+    fap_icon="predator_10px.png",
+    fap_icon_assets="assets",
+    fap_author="ClaraCrazy & Flipper-XFW Team",
+    fap_weburl="https://github.com/ClaraCrazy/Flipper-Xtreme",
+    fap_version=(1, 1),
+    fap_description="All-in-one RF & wireless hacking toolkit",
+)

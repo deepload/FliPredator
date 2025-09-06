@@ -76,8 +76,7 @@ void predator_subghz_send_tesla_charge_port(PredatorApp* app) {
     furi_hal_subghz_set_frequency(315000000);
     furi_hal_subghz_tx();
     
-    // Tesla-specific signal pattern
-    // uint8_t tesla_signal[] = {0x02, 0x8A, 0x8A, 0x8A, 0x02, 0x00}; // Unused variable
+    // Tesla-specific signal pattern (for future implementation)
     
     for(int repeat = 0; repeat < 5; repeat++) {
         furi_hal_subghz_start_async_tx(NULL, NULL);

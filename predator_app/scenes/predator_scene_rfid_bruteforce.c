@@ -61,7 +61,7 @@ bool predator_scene_rfid_bruteforce_on_event(void* context, SceneManagerEvent ev
             
             // Simulate finding a valid card occasionally
             if(app->packets_sent > 0 && app->packets_sent % 100 == 0) {
-                notification_message(app->notifications, &sequence_single_vibro);
+                notification_message(app->notifications, &sequence_success);
                 snprintf(status_text, sizeof(status_text), 
                     "CARD FOUND! ✓\n"
                     "ID: 0x%08lX\n"
